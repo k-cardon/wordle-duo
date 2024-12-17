@@ -66,7 +66,7 @@ const Home: React.FC = () => {
 	const handleGuessSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		if (attempts.length >= 6) {
-			setMessage('No more attempts left!');
+			setMessage('No more attempts left! The answer was ' + answer);
 			return;
 		}
 
@@ -92,31 +92,33 @@ const Home: React.FC = () => {
 
 	return (
 		<div style={{ padding: '20px', textAlign: 'center' }}>
-			<h1>Wordle - Two Player Game</h1>
+			<h1>Wordle Duo | Wordle for Two!</h1>
 			{stage === 'input' ? (
 				<form onSubmit={handleAnswerSubmit}>
 					<input
 						type='text'
 						maxLength={5}
 						value={answer}
-						className='text-black'
+						// className='text-green-200'
 						onChange={(e) =>
 							setAnswer(e.target.value.toUpperCase())
 						}
-						placeholder='Enter answer (5 letters)'
+						placeholder='Player 1, choose the answer (5 letters)'
 						required
 					/>
-					<button type='submit'>Set Answer</button>
+					<button type='submit' className='button p-2 rounded'>
+						Set Answer
+					</button>
 				</form>
 			) : (
 				<>
-					<h2>Guess the word!</h2>
+					<h2>Player 2, guess the word!</h2>
 					<form onSubmit={handleGuessSubmit}>
 						<input
 							type='text'
 							maxLength={5}
 							value={guess}
-							className='text-black'
+							className='text-black-300'
 							onChange={(e) =>
 								setGuess(e.target.value.toUpperCase())
 							}
@@ -149,21 +151,23 @@ const Home: React.FC = () => {
 														height: '30px',
 														lineHeight: '30px',
 														margin: '0 2px',
-														backgroundColor:
+														textAlign: 'center',
+														borderRadius: '5px',
+													}}
+													className={`
+                                                        ${
 															feedback[
 																letterIndex
 															] === 'correct'
-																? 'green'
+																? 'bg-green-200'
 																: feedback[
 																			letterIndex
 																	  ] ===
 																	  'present'
-																	? 'yellow'
-																	: 'grey',
-														color: 'white',
-														textAlign: 'center',
-														borderRadius: '5px',
-													}}
+																	? 'bg-yellow-200'
+																	: 'bg-pink-100'
+														} text-white
+                                                        `}
 												>
 													{letter}
 												</span>
