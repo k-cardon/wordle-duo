@@ -5,3 +5,4 @@ Wordle, for two players. Player one selects any 5 letter word as the solution; p
 todo: 
 fix style -- color coding currently confusing
 deploy
+add instructions?
